@@ -1,0 +1,11 @@
+---
+- hosts: slavenode
+  vars_files:
+    - ../../vars/k8s_vars.yaml  # Corrected spelling
+  roles:
+    #  - ../../roles/kubeadm  # Role name should match the one inside `roles/`
+    #  - ../../roles/masternodesetup
+       - ../../roles/slavenodejoin
+     
+
+

@@ -1,0 +1,7 @@
+---
+# vars file for kubernetes_setup
+package_list:
+  - apt-transport-https
+  - ca-certificates
+  - software-properties-common
+

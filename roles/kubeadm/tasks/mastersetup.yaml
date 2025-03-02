@@ -1,0 +1,18 @@
+---
+- name: Check if Kubernetes is already initialized
+  stat:
+    path: /etc/kubernetes/admin.conf
+  register: kubeadm_installed
+
+- name: Initialize Kubernetes Master Node
+  command: kubeadm init --cri-socket unix:///run/cri-dockerd.sock
+  become: yes
+  register: kubeadm_output
+  changed_when: kubeadm_output.rc == 0
+  when: not kubeadm_installed.stat.exists
+
+- name: Display kubeadm init output
+  debug:
+    var: kubeadm_output.stdout_lines
+  when: not kubeadm_installed.stat.exists
+

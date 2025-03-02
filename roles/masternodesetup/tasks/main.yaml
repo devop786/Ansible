@@ -1,0 +1,52 @@
+---
+- name: Check if Kubernetes is already initialized
+  stat:
+    path: /etc/kubernetes/admin.conf
+  register: kubeadm_installed
+
+- name: Initialize Kubernetes Master Node
+  command: kubeadm init --cri-socket unix:///run/cri-dockerd.sock
+  become: yes
+  register: kubeadm_output
+  changed_when: kubeadm_output.rc == 0
+  when: not kubeadm_installed.stat.exists
+
+- name: Display kubeadm init output
+  debug:
+    var: kubeadm_output.stdout_lines
+  when: not kubeadm_installed.stat.exists
+
+- name: Ensure .kube directory exists
+  file:
+    path: /home/ubuntu/.kube
+    state: directory
+    mode: '0755'
+    owner: ubuntu
+    group: ubuntu
+
+- name: Copy Kubernetes admin.conf to .kube/config
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /home/ubuntu/.kube/config
+    remote_src: yes
+    owner: ubuntu
+    group: ubuntu
+    mode: '0644'
+  become: yes
+
+- name: Generate Kubernetes join command
+  command: kubeadm token create --print-join-command
+  register: join_command
+  changed_when: false
+
+- name: Save join command to a file
+  copy:
+    content: "{{ join_command.stdout }}"
+    dest: /tmp/kube_join_command.sh
+    mode: '0644'
+
+- name: Fetch join command to local machine
+  fetch:
+    src: /tmp/kube_join_command.sh
+    dest: ./kube_join_command.sh
+    flat: yes

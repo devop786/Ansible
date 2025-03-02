@@ -1,0 +1,16 @@
+---
+
+- name: Copy join command to slave nodes
+  copy:
+    src: ~/kubernetes_setup/playbook/kubeadmsetup/kube_join_command.sh
+    dest: /tmp/kube_join_command.sh
+    mode: '0755'
+
+- name: Execute join command on slave nodes
+  command: sh /tmp/kube_join_command.sh
+  register: join_output
+  changed_when: join_output.rc == 0
+
+- name: Print join command output
+  debug:
+    msg: "{{ join_output.stdout_lines }}"

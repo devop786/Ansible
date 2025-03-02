@@ -1,0 +1,11 @@
+[k8s-setup]
+masternode ansible_host=3.87.115.37 ansible_user=ubuntu ansible_ssh_private_key_file=./files/mykey.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+slave1 ansible_host=3.81.170.255 ansible_user=ubuntu ansible_ssh_private_key_file=./files/mykey.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+slave2 ansible_host=50.16.99.160 ansible_user=ubuntu ansible_ssh_private_key_file=./files/mykey.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[masternode]
+masternode ansible_host=3.87.115.37 ansible_user=ubuntu ansible_ssh_private_key_file=./files/mykey.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[slavenode]
+slave1 ansible_host=3.81.170.255 ansible_user=ubuntu ansible_ssh_private_key_file=./files/mykey.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+slave2 ansible_host=50.16.99.160 ansible_user=ubuntu ansible_ssh_private_key_file=./files/mykey.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
