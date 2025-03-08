@@ -1,1 +1,1 @@
-sudo kubeadm join 172.31.44.15:6443 --token qiodqg.07h2gxa3431pl893 --discovery-token-ca-cert-hash sha256:a41e004e8775d66fd304f36523744a4f0818e2349910e512f61c7556e56cfcb6 --cri-socket unix:///run/cri-dockerd.sock
+kubeadm join 172.31.39.11:6443 --token eektdo.lgl497saknd8oxrx --discovery-token-ca-cert-hash sha256:6c845c0ae35c4f6fb6aef20ed4390888b42babf9e58f32b17c01f5e204bf2d08 

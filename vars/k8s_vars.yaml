@@ -4,4 +4,6 @@ package_list:
   - apt-transport-https
   - ca-certificates
   - software-properties-common
+  - gnupg
+  - curl
 

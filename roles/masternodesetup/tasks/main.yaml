@@ -39,6 +39,11 @@
   register: join_command
   changed_when: false
 
+- name: Remove existing join command file if present
+  file:
+    path: /tmp/kube_join_command.sh
+    state: absent
+
 - name: Save join command to a file
   copy:
     content: "{{ join_command.stdout }}"

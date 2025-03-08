@@ -7,11 +7,25 @@
   become: yes
   loop: "{{ package_list }}"
 
+
+- name: Ensure the keyrings directory exist or not
+  file:
+    path: /usr/share/keyrings/
+    state: directory
+    mode: '0755'
+  become: yes  
+
 - name: Add the Docker GPG key
   get_url:
     url: "https://download.docker.com/linux/ubuntu/gpg"
     dest: "/usr/share/keyrings/docker-archive-keyring.gpg"
     mode: '0644'
+  register: key_log
+  become: yes
+
+- name: Display the gpg key log
+  debug:
+    msg: "{{ key_log }}"
 
 - name: Add the Docker Repository
   shell: |

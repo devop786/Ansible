@@ -1,0 +1,33 @@
+---
+
+- name: Apply Weave Net CNI
+  command: kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+  register: weave_apply
+  changed_when: "'created' in weave_apply.stdout or 'configured' in weave_apply.stdout"
+
+
+
+- name: Wait for Weave Net pods to be ready
+  shell: "kubectl get pods -n kube-system -l name=weave-net --no-headers | grep -c Running"
+  register: weave_pods
+  until: weave_pods.stdout|int > 0
+  retries: 10
+  delay: 10
+
+- name: Verify Weave Net pods
+  command: kubectl get pods -n kube-system -l name=weave-net
+  register: weave_status
+  changed_when: false
+
+- name: Display Weave Net pod status
+  debug:
+     msg: "{{ weave_status.stdout_lines }}"
+
+- name: Verify node status
+  command: kubectl get nodes
+  register: node_status
+  changed_when: false
+
+- name: Display node status
+  debug:
+    msg: "{{ node_status.stdout_lines }}"
