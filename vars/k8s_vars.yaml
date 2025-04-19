@@ -6,4 +6,4 @@ package_list:
   - software-properties-common
   - gnupg
   - curl
-
+  - lsb-release

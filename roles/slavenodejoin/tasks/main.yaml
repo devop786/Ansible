@@ -1,3 +1,4 @@
+
 ---
 
 - name: Copy join command to slave nodes
@@ -5,16 +6,18 @@
     src: ~/Ansible/playbook/kubeadmsetup/kube_join_command.sh
     dest: /tmp/kube_join_command.sh
     mode: '0755'
-
-- name: Modify the kubeadm join command with sudo
-  set_fact:
-    modified_kubeadm_join_cmd: "sudo $(cat /tmp/kube_join_command.sh) --cri-socket unix:///var/run/cri-dockerd.sock"
+  become: yes
 
 - name: Execute join command on slave nodes
-  shell: "{{ modified_kubeadm_join_cmd }}"
+  shell: "/bin/bash /tmp/kube_join_command.sh --cri-socket unix:///var/run/cri-dockerd.sock"
   register: join_output
+  become: yes
   changed_when: join_output.rc == 0
+  retries: 2
+  delay: 10
+  until: join_output.rc == 0
 
 - name: Print join command output
   debug:
     msg: "{{ join_output.stdout_lines }}"
+
