@@ -1,15 +1,15 @@
-
 ---
 
 - name: Copy join command to slave nodes
   copy:
-    src: ~/Ansible/playbook/kubeadmsetup/kube_join_command.sh
+    # Use full path (no ~ expansion in Ansible)
+    src: /home/ubuntu/aa/Ansible/playbook/kubeadmsetup/kube_join_command.sh
     dest: /tmp/kube_join_command.sh
     mode: '0755'
   become: yes
 
 - name: Execute join command on slave nodes
-  shell: "/bin/bash /tmp/kube_join_command.sh --cri-socket unix:///var/run/cri-dockerd.sock"
+  shell: "/bin/bash /tmp/kube_join_command.sh"
   register: join_output
   become: yes
   changed_when: join_output.rc == 0

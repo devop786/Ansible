@@ -1,7 +1,0 @@
----
-
-- name: Install Required Packages
-  apt:
-    name: "{{ item }}"
-    state: presnet
-  loop: "{{ package_lsit }}"

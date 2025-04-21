@@ -1,4 +1,6 @@
 #!/bin/bash
-kubeadm join 172.31.1.228:6443 --token lacx3d.186pwi3p4opq7sv2 \
-  --discovery-token-ca-cert-hash sha256:2ff6cbc30dc4d95033657ef009cdaa7b76dcf3b630a3500376034b595ae9a25a \
+kubeadm join 172.31.2.232:6443 \
+  --token 03zmmv.p6wcpb9vmy42uh2j \
+  --discovery-token-ca-cert-hash sha256:d463ea0070c0784a26d680ea208f708d7dc954ad2d13785c41ca843bc8081d67 \
   --cri-socket unix:///var/run/cri-dockerd.sock
+

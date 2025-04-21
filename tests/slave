@@ -1,5 +1,5 @@
 [slavenode]
-slave1 ansible_host=16.16.208.239 ansible_user=ubuntu ansible_ssh_private_key_file=./files/mykey.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
-slave2 ansible_host=13.48.86.165 ansible_user=ubuntu ansible_ssh_private_key_file=./files/mykey.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
-slave3 ansible_host=13.50.233.173 ansible_user=ubuntu ansible_ssh_private_key_file=./files/mykey.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
-slave4 ansible_host=13.48.128.63 ansible_user=ubuntu ansible_ssh_private_key_file=./files/mykey.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+slave1 ansible_host=16.170.133.78 ansible_user=ubuntu ansible_ssh_private_key_file=./files/mykey.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+slave2 ansible_host=13.48.124.49 ansible_user=ubuntu ansible_ssh_private_key_file=./files/mykey.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+slave3 ansible_host=13.53.137.117 ansible_user=ubuntu ansible_ssh_private_key_file=./files/mykey.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+slave4 ansible_host=16.16.195.130 ansible_user=ubuntu ansible_ssh_private_key_file=./files/mykey.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
